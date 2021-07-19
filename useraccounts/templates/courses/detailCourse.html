@@ -1,0 +1,257 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content%}
+{% include 'accounts/sectionhero1.html' %}
+<head>
+    <meta charset="utf-8">
+    <title> Detail Course </title>
+
+
+    <style type="text/css">
+        #link a {
+            color: #eb2f06 ;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+        #link i{
+            font-size: 10px;
+        }
+
+        #showcase .container .infor{
+            float: right;
+            
+        }
+        #showcase .container .infor .action {
+            padding: 20px;
+            text-align: center;
+        }
+        #showcase .container .infor .action h1 {
+            color: #e55039;
+            
+        }
+        #showcase .container .infor .action a{
+            text-decoration: none;
+            padding: 10px 30px;
+            border: 1px solid #eb4d4b;
+            border-radius: 10px;
+            background: #eb4d4b;
+            color: #fff;
+            font-size: 20px;
+        }
+        #showcase .container .infor .action a:hover{
+            background-color: #eb2f06;
+            transition: .75s;
+        }
+        #showcase .container .infor .contain .list-contain{
+            font-size: 1.5rem;
+        }
+        #showcase .container .infor .contain ul {
+            list-style: none;
+            line-height: 30px;
+            
+            float: left;
+        }
+        #showcase .container .infor .contain ul li {
+            color: #494949
+        }
+        #showcase .container .infor .contain ul li i {
+            padding: 10px;
+        }
+        
+        
+        #showcase .container .infor img{
+            width: 300px;
+            height: 250px;
+            float: right;
+            padding: 20px;
+        }
+
+        #detail  i{
+            color:orange;
+            font-size:25px;
+        }
+        h3{
+            margin-top:-15px;
+            font-size:37px;
+        }
+        #showcase{
+            
+            border-bottom:1px solid #618685;
+            padding-bottom: 50px;
+            background-size:100%;
+            height: 500px;
+        }
+        #showcase .row{
+            height:300px;
+            
+        }
+        #showcase .showcase-content{
+            padding:50px;
+            opacity:0.8;
+            height:80px;
+            float: left;
+            margin-left: -300px;
+        }
+       
+
+        #showcase .left{
+        float: left;
+        margin-top:-170px;
+        margin-left:-100px;
+        width: 80%;
+        }
+        .primary-text {
+            color:#484f4f;
+        }
+        #detail {
+        padding-bottom: 100px;
+        margin:20px;
+        margin-left:-300px;
+        text-align: center;
+        }
+        #detail .container {
+            padding-left: 300px;
+            font-size: 1.5rem;
+        }
+    </style>
+
+</head>
+
+{% if courses %}
+<section id="link">
+    <div class="container">
+        <a href="{% url 'home' %}"> Home </a>
+        <i class="fa fa-chevron-right"></i>
+        <a href="#">{{courses.nameCourse}}</a>
+    </div>
+
+</section>
+<section id="showcase">
+    
+    <div class="container">
+        
+        <div class="infor">
+            <img src="{{courses.courseImg.url}}" alt="##">
+            <div class="action">
+                <h1>Miễn phí</h1>
+                <a href="#">Đăng kí học</a>
+            </div>
+            <div class="contain">
+                <ul class="list-contain"> 
+                    <li><i class="fa fa-graduation-cap"></i><span>Trình độ</span></li>
+                    <li><i class="fa fa-tags"></i><span>Tổng số bài học</span></li>
+                    <li><i class="fa fa-clock"></i><span>Thời lượng .....</span></li>
+                    <li><i class="fa fa-battery-4"></i><span>Học mọi lúc, mọi nơi</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row center-xs center-sm center md center-lg">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 showcase-content ">
+                <h3><b>{{courses.nameCourse}} <span class="primary-text">{{courses.description}}</span></b></h3>
+            </div>
+        </div>
+         <div class="left">
+                <h5> Chi tiết khóa học </h5>
+                    <p>{{courses.detail}}</p>
+         </div>
+    </div>
+    
+</section>
+
+<section id="detail">
+    <div class="container">
+        
+        <div class="row center-xs center-sm center md center-lg">
+            <div class="left col-xs-12 col-sm-4 col-md-6 ">
+                <i class="fas fa-trophy"></i><br>
+                 <h4> Bạn sẽ đạt được gì sau khóa học? </h4>
+                  <i class="fas fa-check"></i> <span>{{courses.benefit}}  </span>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-6  ">
+                <i class="fas fa-clipboard"></i><br>
+                 <h4> Yêu cầu khi học khóa học </h4>
+                  <i class="fas fa-check"></i> <span> {{courses.detail}}</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<section>
+    <div class="section-title">
+ <h2 style='text-align: center; padding:20px; '>Nội dung khoá học </h2>
+    </div>
+{% for item in data %}
+{% if item.parent is None %}
+
+<div id="accordion" style='padding:3px 400px;'>
+  <div class="card" style="border: none;">
+    <div class="card-header" id="headingOne" style="background-color:#fff; border: 1px solid orange; border-radius: 5px;" >
+      <h5 class="mb-0" >
+        <button class="btn" data-toggle="collapse" data-target="#collapse{{item.id}}" aria-expanded="true" aria-controls="collapse{{item.id}}"
+        style="font-size: 17px; color: #000; outline:none !important; ">
+          + <strong>{{item.name}}</strong>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{item.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordion" >
+     {% for item2 in data %}
+     {% if item2.parent.name == item.name %}
+     <div class="card-body" style="border-bottom: 1px solid rgba(0,0,0,.25) ;">
+       <button style="font-size: 17px; color: #000" class="btn" data-toggle="collapse" data-target="" aria-expanded="true" aria-controls="collapse{{item.id}}">
+        - <a href="{% url 'detailVideo' item.macourses %}" style="text-decoration: none; color:#000;">{{item2.name}} </a>
+      </button>
+
+    </div>
+    {% endif  %}
+    {% endfor %}
+
+  </div>
+
+
+</div>
+
+
+
+</div>
+{% endif  %}
+{% endfor %}
+</section>
+<br><br><br>
+<br>
+ <div class="container">
+         <div class="section-title">
+             <h2>Video bài giảng </h2>
+         </div>
+
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-md-3">
+
+
+
+                 {% if video.thumbnail %}
+
+                <a href="{% url 'detailVideo' video.id %}">
+                    <img src="{{video.thumbnail.url}}" alt="" style="width:300px; height: 300px "></a>
+                <center> <strong>{{video.title}}</strong></center>
+                <center> {{video.uploader}}</center>
+            {% endif %}
+
+
+            </div>{% endfor %}
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+{% endblock content%}
+
+

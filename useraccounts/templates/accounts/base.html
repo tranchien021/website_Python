@@ -1,0 +1,14 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+ {% include 'accounts/sectionhero.html' %}
+
+<!--    khoahoc-->
+      {% include 'courses/course.html' %}
+<!--    teacher-->
+
+      {% include 'accounts/teacher.html' %}
+
+{% include 'accounts/news.html' %}
+{% endblock %}
